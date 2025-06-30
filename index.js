@@ -1,23 +1,28 @@
-//enviar dados do form
+document.getElementById('cep').addEventListener('keydown', function (event) {
+    if (event.key === 'Enter') {
+        event.preventDefault();
+        consultarCEP();
+    }
+});
+
 document.getElementById("form").addEventListener("submit", function (e) {
     e.preventDefault();
 
-    const email = document.getElementById("email").value;
-    const senha = document.getElementById("senha").value;
+    const dados = {
+        cep: document.getElementById("cep").value,
+        rua: document.getElementById("rua").value,
+        comp: document.getElementById("comp").value,
+        estado: document.getElementById("estado").value,
+        cidade: document.getElementById("cidade").value,
+        bairro: document.getElementById("bairro").value
+    };
 
-    localStorage.setItem("email", email);
-    localStorage.setItem("senha", senha);
-
-    if (latSelecionada !== null && lngSelecionada !== null) {
-        localStorage.setItem("latitude", latSelecionada);
-        localStorage.setItem("longitude", lngSelecionada);
-    } else {
-        alert("Por favor, selecione sua localização no mapa antes de enviar.");
-        return; 
-    }
+    localStorage.setItem("dadosEndereco", JSON.stringify(dados));
 
     alert("Dados salvos com sucesso!");
 });
+
+
 
 function consultarCEP() {
     const cep = document.getElementById('cep').value.replace(/\D/g, '');
@@ -55,129 +60,3 @@ function limparCamposEndereco() {
     document.getElementById('cidade').value = '';
     document.getElementById('estado').value = '';
 }
-
-// function obterEnderecoPorCoordenadas(lat, lon) {
-//     const url = `https://nominatim.openstreetmap.org/reverse?format=jsonv2&lat=${lat}&lon=${lon}`;
-
-//     fetch(url)
-//         .then(response => response.json())
-//         .then(data => {
-//             if (data && data.address) {
-//                 const address = data.address;
-
-//                 document.getElementById('rua').value = address.road || '';
-//                 document.getElementById('bairro').value = address.suburb || address.village || address.hamlet || '';
-//                 document.getElementById('cidade').value = address.city || address.town || address.village || '';
-//                 document.getElementById('estado').value = ufRecebidaDaAPI;
-//                 document.getElementById('estado').value = address.state ||  address.state_code || ''; //modifiquei aqui
-//                 document.getElementById('num').value = address.house_number || ''; //modifiquei aqui
-//                 document.getElementById('cep').value = address.postcode || '';
-                
-//             } else {
-//                 alert('Endereço não encontrado para essas coordenadas.');
-//             }
-//         })
-//         .catch(error => {
-//             console.error('Erro ao obter endereço:', error);
-//             alert('Erro ao buscar o endereço pelas coordenadas.');
-//         });
-// }
-
-function obterEnderecoPorCoordenadas(lat, lon) {
-    console.log('Consultando endereço para:', lat, lon);
-
-    const url = `https://nominatim.openstreetmap.org/reverse?format=jsonv2&lat=${lat}&lon=${lon}&accept-language=pt`;
-
-    fetch(url)
-        .then(response => {
-            if (!response.ok) {
-                throw new Error(`HTTP error! status: ${response.status}`);
-            }
-            return response.json();
-        })
-        .then(data => {
-            console.log('Resposta Nominatim:', data);
-
-            if (data && data.address) {
-                const address = data.address;
-
-                const estadosBR = {
-                    "Acre": "AC", "Alagoas": "AL", "Amapá": "AP", "Amazonas": "AM",
-                    "Bahia": "BA", "Ceará": "CE", "Distrito Federal": "DF", "Espírito Santo": "ES",
-                    "Goiás": "GO", "Maranhão": "MA", "Mato Grosso": "MT", "Mato Grosso do Sul": "MS",
-                    "Minas Gerais": "MG", "Pará": "PA", "Paraíba": "PB", "Paraná": "PR",
-                    "Pernambuco": "PE", "Piauí": "PI", "Rio de Janeiro": "RJ", "Rio Grande do Norte": "RN",
-                    "Rio Grande do Sul": "RS", "Rondônia": "RO", "Roraima": "RR", "Santa Catarina": "SC",
-                    "São Paulo": "SP", "Sergipe": "SE", "Tocantins": "TO"
-                };
-
-                document.getElementById('rua').value = address.road || '';
-                document.getElementById('bairro').value = address.suburb || address.village || address.hamlet || '';
-                document.getElementById('cidade').value = address.city || address.town || address.village || '';
-                document.getElementById('num').value = address.house_number || '';
-                document.getElementById('cep').value = address.postcode || '';
-
-                const siglaEstado = estadosBR[address.state] || '';
-                document.getElementById('estado').value = siglaEstado;
-
-            } else {
-                alert('Endereço não encontrado para essas coordenadas.');
-            }
-        })
-        .catch(error => {
-            console.error('Erro ao obter endereço:', error);
-            alert('Erro ao buscar o endereço pelas coordenadas.');
-        });
-}
-
-
-function carregarEstados() {
-    const selectEstado = document.getElementById("estado");
-    selectEstado.innerHTML = '<option value="">Selecione um estado</option>';
-
-    fetch("https://servicodados.ibge.gov.br/api/v1/localidades/estados")
-        .then(response => response.json())
-        .then(estados => {
-            estados.sort((a, b) => a.nome.localeCompare(b.nome));
-
-            estados.forEach(estado => {
-                const option = document.createElement("option");
-                option.value = estado.sigla;
-                option.textContent = estado.nome;
-                selectEstado.appendChild(option);
-            });
-        })
-        .catch(error => {
-            console.error("Erro ao carregar estados:", error);
-        });
-}
-
-const estadosBR = {
-    "Acre": "AC",
-    "Alagoas": "AL",
-    "Amapá": "AP",
-    "Amazonas": "AM",
-    "Bahia": "BA",
-    "Ceará": "CE",
-    "Distrito Federal": "DF",
-    "Espírito Santo": "ES",
-    "Goiás": "GO",
-    "Maranhão": "MA",
-    "Mato Grosso": "MT",
-    "Mato Grosso do Sul": "MS",
-    "Minas Gerais": "MG",
-    "Pará": "PA",
-    "Paraíba": "PB",
-    "Paraná": "PR",
-    "Pernambuco": "PE",
-    "Piauí": "PI",
-    "Rio de Janeiro": "RJ",
-    "Rio Grande do Norte": "RN",
-    "Rio Grande do Sul": "RS",
-    "Rondônia": "RO",
-    "Roraima": "RR",
-    "Santa Catarina": "SC",
-    "São Paulo": "SP",
-    "Sergipe": "SE",
-    "Tocantins": "TO"
-};
