@@ -1,0 +1,83 @@
+* {
+    margin: 0;
+    padding: 0;
+}
+
+body {
+    background-color: #e6f4ea;
+}
+
+.container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: 50%;
+    margin: auto;
+    background-color: white;
+    padding: 20px;
+    height: 98vw;
+    border-radius: 30px;
+    border-top: 8px solid #2e7d32;
+}
+
+img {
+    height: 100px;
+}
+
+#form {
+    display: flex;
+    flex-direction: column;
+    width: 90%;
+}
+
+#enviar {
+    margin-top: 5px;
+}
+
+#mapa {
+    margin-top: 10px;
+    width: 100%;
+    height: 300px;
+    background-color: rgb(171, 212, 248);
+}
+
+h1 {
+    margin-bottom: 10px;
+    font-weight: 300;
+    color: #2e7d32;
+}
+
+label {
+    color: #2e7d32;
+}
+
+.input {
+    width: 100%;
+    margin-bottom: 10px;
+}
+
+input {
+    width: 100%;
+    height: 20px;
+    font-size: 16px;
+    padding: 3px;
+}
+
+label {
+    font-size: 20px;
+}
+
+button {
+    padding: 5px;
+    background-color: #2e7d32;
+    border: none;
+    border-radius: 5px;
+    color: white;
+    font-size: 16px;
+}
+
+select#estado {
+    width: 100%;
+    padding: 10px;
+    font-size: 16px;
+}
