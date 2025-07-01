@@ -15,7 +15,7 @@ body {
     margin: auto;
     background-color: white;
     padding: 20px;
-    height: 98vw;
+    height: 100%;
     border-radius: 30px;
     border-top: 8px solid #2e7d32;
 }
@@ -85,33 +85,30 @@ select#estado {
 
 #listar {
     margin-top: 10px;
+    margin-bottom: 10px;
     width: 90%;
 }
 
-/* Estilo para a lista de endereços */
 #lista {
-    list-style-type: none;  /* Remove os pontos da lista */
+    list-style-type: none;
     padding: 0;
 }
 
-/* Estilo para cada item na lista */
 #lista li {
-    margin-bottom: 15px;  /* Espaço entre os itens */
+    margin-bottom: 15px;
     padding: 10px;
-    background-color: #f9f9f9;  /* Cor de fundo clara */
-    border: 1px solid #ddd;  /* Borda cinza clara */
-    border-radius: 5px;  /* Bordas arredondadas */
-    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);  /* Sombra leve */
+    background-color: #f9f9f9;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
 }
 
-/* Destaque para os títulos de cada campo */
 #lista li strong {
-    color: #333;  /* Cor mais escura para os títulos */
+    color: #333;
     font-weight: bold;
 }
 
-/* Adiciona um efeito ao passar o mouse sobre o item da lista */
 #lista li:hover {
-    background-color: #e0f7fa;  /* Cor de fundo ao passar o mouse */
-    cursor: pointer;  /* Muda o cursor para indicar que o item é clicável */
+    background-color: #e0f7fa;
+    cursor: pointer;
 }
