@@ -13,6 +13,9 @@
 
         <form id="form" action="post">
             <div class="input">
+                <label for="nome">Nome</label>
+                <input type="text" class="input" name="nome" id="nome" placeholder="Digite seu nome">
+
                 <label for="cep">CEP</label>
                 <input type="text" class="input" name="cep" id="cep" placeholder="Digite seu CEP">
 
@@ -30,12 +33,14 @@
 
                 <label for="bairro">Bairro</label>
                 <input type="text" name="bairro" id="bairro" placeholder="Digite o nome do seu bairro">
-
             </div>
 
             <button type="submit" id="enviar">Enviar</button>
         </form>
+
+        <button type="button" id="listar">Listar endereços</button>
         
+        <div id="lista"></div>
     </div>
     
     <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>

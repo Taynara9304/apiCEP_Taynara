@@ -8,13 +8,27 @@ document.getElementById('cep').addEventListener('keydown', function (event) {
 document.getElementById("form").addEventListener("submit", function (e) {
     e.preventDefault();
 
+    const nome = document.getElementById("nome").value.trim();
+    const cep = document.getElementById("cep").value.trim();
+    const rua = document.getElementById("rua").value.trim();
+    const comp = document.getElementById("comp").value.trim();
+    const estado = document.getElementById("estado").value.trim();
+    const cidade = document.getElementById("cidade").value.trim();
+    const bairro = document.getElementById("bairro").value.trim();
+
+    if (!nome || !cep || !rua || !comp || !estado || !cidade || !bairro) {
+        alert("Preencha todos os campos antes de salvar.");
+        return;
+    }
+
     const dados = {
-        cep: document.getElementById("cep").value,
-        rua: document.getElementById("rua").value,
-        comp: document.getElementById("comp").value,
-        estado: document.getElementById("estado").value,
-        cidade: document.getElementById("cidade").value,
-        bairro: document.getElementById("bairro").value
+        nome,
+        cep,
+        rua,
+        comp,
+        estado,
+        cidade,
+        bairro
     };
 
     localStorage.setItem("dadosEndereco", JSON.stringify(dados));
@@ -22,6 +36,20 @@ document.getElementById("form").addEventListener("submit", function (e) {
     alert("Dados salvos com sucesso!");
 });
 
+document.getElementById("listar").addEventListener("click", function (e) {    let item = document.createElement("p");
+    var texto = document.createTextNode("Novo item");
+    let dados = localStorage.getItem("dadosEndereco");
+
+    dados.forEach(dado => {
+        let dados = document.getElementById("lista").innerHTML()
+        const item = dados.parseJSON(dados);
+    });
+    item.appendChild(texto);
+
+    var lista = document.getElementById("lista");
+    lista.appendChild(item);
+
+});
 
 
 function consultarCEP() {

@@ -74,10 +74,16 @@ button {
     border-radius: 5px;
     color: white;
     font-size: 16px;
+    width: 100%;
 }
 
 select#estado {
     width: 100%;
     padding: 10px;
     font-size: 16px;
+}
+
+#listar {
+    margin-top: 10px;
+    width: 90%;
 }
