@@ -87,3 +87,31 @@ select#estado {
     margin-top: 10px;
     width: 90%;
 }
+
+/* Estilo para a lista de endereços */
+#lista {
+    list-style-type: none;  /* Remove os pontos da lista */
+    padding: 0;
+}
+
+/* Estilo para cada item na lista */
+#lista li {
+    margin-bottom: 15px;  /* Espaço entre os itens */
+    padding: 10px;
+    background-color: #f9f9f9;  /* Cor de fundo clara */
+    border: 1px solid #ddd;  /* Borda cinza clara */
+    border-radius: 5px;  /* Bordas arredondadas */
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);  /* Sombra leve */
+}
+
+/* Destaque para os títulos de cada campo */
+#lista li strong {
+    color: #333;  /* Cor mais escura para os títulos */
+    font-weight: bold;
+}
+
+/* Adiciona um efeito ao passar o mouse sobre o item da lista */
+#lista li:hover {
+    background-color: #e0f7fa;  /* Cor de fundo ao passar o mouse */
+    cursor: pointer;  /* Muda o cursor para indicar que o item é clicável */
+}

@@ -18,7 +18,7 @@ document.getElementById("form").addEventListener("submit", function (e) {
 
     if (!nome || !cep || !rua || !comp || !estado || !cidade || !bairro) {
         alert("Preencha todos os campos antes de salvar.");
-        return;
+        return; 
     }
 
     const dados = {
@@ -31,25 +31,50 @@ document.getElementById("form").addEventListener("submit", function (e) {
         bairro
     };
 
-    localStorage.setItem("dadosEndereco", JSON.stringify(dados));
+    let listaDeEnderecos = JSON.parse(localStorage.getItem("listaDeEnderecos")) || [];
 
-    alert("Dados salvos com sucesso!");
+    listaDeEnderecos.push(dados);
+
+    localStorage.setItem("listaDeEnderecos", JSON.stringify(listaDeEnderecos));
+
+    alert("Endereço salvo com sucesso!");
+
+    document.getElementById("nome").value = '';
+    document.getElementById("cep").value = '';
+    document.getElementById("rua").value = '';
+    document.getElementById("comp").value = '';
+    document.getElementById("estado").value = '';
+    document.getElementById("cidade").value = '';
+    document.getElementById("bairro").value = '';
 });
 
-document.getElementById("listar").addEventListener("click", function (e) {    let item = document.createElement("p");
-    var texto = document.createTextNode("Novo item");
-    let dados = localStorage.getItem("dadosEndereco");
+document.getElementById("listar").addEventListener("click", function (e) {
+    let listaDeEnderecos = JSON.parse(localStorage.getItem("listaDeEnderecos")) || [];
 
-    dados.forEach(dado => {
-        let dados = document.getElementById("lista").innerHTML()
-        const item = dados.parseJSON(dados);
-    });
-    item.appendChild(texto);
+    const lista = document.getElementById("lista");
+    lista.innerHTML = "";
 
-    var lista = document.getElementById("lista");
-    lista.appendChild(item);
+    if (listaDeEnderecos.length > 0) {
+        listaDeEnderecos.forEach(dados => {
+            let item = document.createElement("li");
 
+            item.innerHTML = `
+                <strong>Nome:</strong> ${dados.nome}<br>
+                <strong>CEP:</strong> ${dados.cep}<br>
+                <strong>Rua:</strong> ${dados.rua}<br>
+                <strong>Complemento:</strong> ${dados.comp}<br>
+                <strong>Estado:</strong> ${dados.estado}<br>
+                <strong>Cidade:</strong> ${dados.cidade}<br>
+                <strong>Bairro:</strong> ${dados.bairro}
+            `;
+
+            lista.appendChild(item);
+        });
+    } else {
+        alert("Nenhum endereço encontrado.");
+    }
 });
+
 
 
 function consultarCEP() {
